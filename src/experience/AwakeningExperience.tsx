@@ -123,7 +123,7 @@ export const AwakeningExperience: React.FC = () => {
         >
           <div className="space-y-4">
             <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#c99a5e]">
-              Experience Collapse · Layering Memories
+              Ang Pagkakahabi ng mga Tinig · Returning Memories
             </span>
             <h2 className="text-2xl sm:text-3xl font-serif text-white/90 italic">
               Nagsasabay-sabay ang mga tinig…

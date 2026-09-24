@@ -9,6 +9,10 @@ export const cainAndAbelOffering: SceneDefinition = {
   pov: "third",
   emotion: { attachment: 0.4, overwhelm: 0.2 },
   environment: { id: "field-dusk", fallback2D: "field-dusk-2d" },
+  audio: {
+    track: "cain-abel",
+    ambient: "field-dusk",
+  },
   echoTags: ["siblings", "jealousy", "comparison"],
   narrative: [
     {

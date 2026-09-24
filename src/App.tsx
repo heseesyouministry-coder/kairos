@@ -4,7 +4,11 @@ import { AppProviders } from "./app/providers";
 import { AppRoutes } from "./app/router";
 import { TopBar } from "./components/interface/TopBar";
 import { DebugPanel } from "./components/overlays/DebugPanel";
+import { NarrativeErrorBoundary } from "./components/interface/NarrativeErrorBoundary";
+import { CinematicMusicLayer } from "./components/audio/CinematicMusicLayer";
 import { AudioManager } from "./audio/AudioManager";
+import { MusicDirector } from "./audio/worship/MusicDirector";
+import { setupAudioUnlockListeners } from "./audio/audioContext";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -17,21 +21,16 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  // Global user interaction listener to wake up AudioContext smoothly
+  const isDevModeActive =
+    typeof window !== "undefined" &&
+    (import.meta.env.VITE_ENABLE_DEV_MODE === "true" ||
+      new URLSearchParams(window.location.search).get("debug") === "kairos");
+
+  // Global user interaction listeners to wake up AudioContext reliably
   useEffect(() => {
-    const handleFirstInteraction = () => {
-      AudioManager.init();
-      window.removeEventListener("pointerdown", handleFirstInteraction);
-      window.removeEventListener("keydown", handleFirstInteraction);
-    };
-
-    window.addEventListener("pointerdown", handleFirstInteraction, { once: true });
-    window.addEventListener("keydown", handleFirstInteraction, { once: true });
-
-    return () => {
-      window.removeEventListener("pointerdown", handleFirstInteraction);
-      window.removeEventListener("keydown", handleFirstInteraction);
-    };
+    AudioManager.init();
+    MusicDirector.init();
+    setupAudioUnlockListeners();
   }, []);
 
   return (
@@ -41,9 +40,12 @@ export default function App() {
         <div className="relative min-h-screen bg-[#0c0d10] text-[#e8e6df] font-body selection:bg-[#c99a5e]/30 selection:text-white">
           <TopBar />
           <main className="w-full">
-            <AppRoutes />
+            <NarrativeErrorBoundary>
+              <AppRoutes />
+            </NarrativeErrorBoundary>
           </main>
-          <DebugPanel />
+          {isDevModeActive && <DebugPanel />}
+          <CinematicMusicLayer />
         </div>
       </AppProviders>
     </BrowserRouter>

@@ -86,6 +86,11 @@ export const GospelExperience: React.FC<{ explicitSlug?: string }> = ({ explicit
   const markSceneCompleted = useProgressStore((s) => s.markSceneCompleted);
   const [resonatingMemory, setResonatingMemory] = useState<string | null>(null);
 
+  const isDevModeActive =
+    typeof window !== "undefined" &&
+    (import.meta.env.VITE_ENABLE_DEV_MODE === "true" ||
+      new URLSearchParams(window.location.search).get("debug") === "kairos");
+
   useEffect(() => {
     setCurrentScene(scene.id, scene.pov, scene.focus, scene.emotion);
 
@@ -119,17 +124,17 @@ export const GospelExperience: React.FC<{ explicitSlug?: string }> = ({ explicit
             {title}
           </h1>
 
-          {/* Explicit indicator for Theo's Intervention pivotal hinge beat */}
-          {scene.id === "gospel-theos-intervention" && (
+          {/* Explicit indicator for Theo's Intervention pivotal hinge beat (Dev Gated) */}
+          {isDevModeActive && scene.id === "gospel-theos-intervention" && (
             <div className="inline-flex items-center gap-1.5 px-3 py-1 mt-2 rounded-full bg-[#8c362e]/15 border border-[#8c362e]/40 text-[10px] uppercase font-sans tracking-widest text-[#f29388]">
-              <span>Coping Strategy Structural Collapse (Knowledge ≠ Control)</span>
+              <span>Coping Strategy Structural Shift (Knowledge ≠ Control)</span>
             </div>
           )}
 
-          {/* Active Memory Resonance Indicator */}
-          {resonatingMemory && (
+          {/* Active Memory Resonance Indicator (Dev Gated) */}
+          {isDevModeActive && resonatingMemory && (
             <div className="inline-flex items-center gap-1.5 px-3 py-1 mt-2 mx-auto rounded-full bg-[#2a1715] border border-[#8c362e]/50 text-[10px] font-mono text-[#f29388] tracking-wider animate-pulse">
-              <span>MEMORY RESONANCE: {resonatingMemory} (violence / brotherhood / betrayal)</span>
+              <span>MEMORY RESONANCE: {resonatingMemory}</span>
             </div>
           )}
         </header>

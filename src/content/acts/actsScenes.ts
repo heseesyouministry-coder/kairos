@@ -172,6 +172,7 @@ export const paulScene: SceneDefinition = {
     track: "expansion",
     ambient: "expansion-wind",
   },
+  echoTags: ["doubt", "wisdom-vs-knowledge", "intellectual-humility"],
   narrative: [
     {
       type: "narrative",

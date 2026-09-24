@@ -5,7 +5,10 @@ import { useExperienceStore } from "../../state/experienceStore";
 import { useProgressStore } from "../../state/progressStore";
 import { useSettingsStore } from "../../state/settingsStore";
 import { useAudioStore } from "../../state/audioStore";
+import { useWorshipStore } from "../../state/worshipStore";
 import { AudioManager } from "../../audio/AudioManager";
+import { MusicDirector } from "../../audio/worship/MusicDirector";
+import { resumeAudioContext } from "../../audio/audioContext";
 import {
   cainBloodMemory,
   josephSeparationMemory,
@@ -29,7 +32,10 @@ import {
   RefreshCw,
   Eye,
   Sliders,
+  BookOpen,
+  Headphones,
 } from "lucide-react";
+import { LibraryDiffInspector } from "./LibraryDiffInspector";
 
 export const DebugPanel: React.FC = () => {
   const navigate = useNavigate();
@@ -40,6 +46,8 @@ export const DebugPanel: React.FC = () => {
   const toggleWebgl = useSettingsStore((s) => s.toggleWebgl);
   const reducedMotion = useSettingsStore((s) => s.reducedMotion);
   const toggleReducedMotion = useSettingsStore((s) => s.toggleReducedMotion);
+  const readerMode = useSettingsStore((s) => s.readerMode);
+  const toggleReaderMode = useSettingsStore((s) => s.toggleReaderMode);
   const fps = useSettingsStore((s) => s.fps);
   const drawCalls = useSettingsStore((s) => s.drawCalls);
   const assetLoadingStatus = useSettingsStore((s) => s.assetLoadingStatus);
@@ -58,6 +66,13 @@ export const DebugPanel: React.FC = () => {
   const currentAmbient = useAudioStore((s) => s.currentAmbient);
   const playbackState = useAudioStore((s) => s.playbackState);
   const lastAudioAction = useAudioStore((s) => s.lastAction);
+
+  const currentWorshipTrack = useWorshipStore((s) => s.currentTrack);
+  const currentWorshipMode = useWorshipStore((s) => s.currentMode);
+  const worshipDucking = useWorshipStore((s) => s.duckingRatio);
+  const worshipSilence = useWorshipStore((s) => s.isSilence);
+  const worshipSilenceReason = useWorshipStore((s) => s.silenceReason);
+  const toggleMusicDrawer = useWorshipStore((s) => s.toggleMusicDrawer);
 
   const handleTestSeedMemory = () => {
     addMemory(cainBloodMemory);
@@ -120,6 +135,9 @@ export const DebugPanel: React.FC = () => {
                 </div>
               </div>
             </div>
+
+            {/* Phase 7: Library Mode Side-by-Side Filter Inspector */}
+            <LibraryDiffInspector currentSceneId={currentSceneId} />
 
             {/* 2. Emotional State Vector */}
             <div className="p-3.5 rounded-lg bg-[#151720] border border-[#222533]">
@@ -218,12 +236,59 @@ export const DebugPanel: React.FC = () => {
                     {reducedMotion ? "ON (Calm)" : "OFF (Normal)"}
                   </button>
                 </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-stone-300">Engine Mode:</span>
+                  <button
+                    onClick={toggleReaderMode}
+                    className={`px-3 py-1 rounded text-xs font-mono transition-colors ${
+                      readerMode === "writer"
+                        ? "bg-amber-950/80 text-amber-300 border border-amber-600/70"
+                        : "bg-blue-950/80 text-blue-300 border border-blue-700/60"
+                    }`}
+                  >
+                    {readerMode === "writer" ? "WRITER MODE (Prose Review)" : "EXPERIENCE MODE (Default)"}
+                  </button>
+                </div>
               </div>
             </div>
 
-            {/* 4. Audio Engine State */}
-            <div className="p-3.5 rounded-lg bg-[#151720] border border-[#222533]">
-              <div className="flex items-center justify-between mb-2">
+            {/* 4. Audio Engine & Worship Soundtrack State */}
+            <div className="p-3.5 rounded-lg bg-[#151720] border border-[#222533] space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-stone-400 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+                  <Headphones className="w-3.5 h-3.5 text-[#c99a5e]" /> Narrative Worship Director
+                </span>
+                <button
+                  onClick={toggleMusicDrawer}
+                  className="text-[10px] text-[#c99a5e] hover:underline font-mono"
+                >
+                  Open Drawer
+                </button>
+              </div>
+
+              <div className="p-2 rounded bg-[#0d0f16] border border-[#1d202d] text-[11px] font-mono space-y-1">
+                <div className="flex justify-between">
+                  <span className="text-stone-500">Mode:</span>
+                  <span className="text-[#c99a5e] uppercase">{worshipSilence ? "SILENCE" : currentWorshipMode}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-stone-500">Track:</span>
+                  <span className="text-white truncate max-w-[170px]">
+                    {worshipSilence ? "Stark Silence" : currentWorshipTrack?.title || "Ambient Stream"}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-stone-500">Ducking Ratio:</span>
+                  <span className="text-stone-300">{Math.round(worshipDucking * 100)}%</span>
+                </div>
+                {worshipSilenceReason && (
+                  <div className="text-[10px] text-stone-400 italic border-t border-[#1a1d29] pt-1 mt-1">
+                    "{worshipSilenceReason}"
+                  </div>
+                )}
+              </div>
+
+              <div className="flex items-center justify-between mb-1 pt-1">
                 <span className="font-mono text-stone-400 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
                   <Volume2 className="w-3.5 h-3.5 text-[#c99a5e]" /> Audio Manager
                 </span>
@@ -239,15 +304,36 @@ export const DebugPanel: React.FC = () => {
                   <div className="text-white">{currentAmbient || "none"}</div>
                 </div>
               </div>
-              <div className="mt-2 text-[10px] font-mono text-stone-500 truncate">
+              <div className="mt-1 text-[10px] font-mono text-stone-500 truncate">
                 Last action: <span className="text-stone-400">{lastAudioAction}</span>
               </div>
-              <div className="flex gap-2 mt-3">
+              <div className="flex flex-wrap gap-2 mt-3">
                 <button
-                  onClick={() => AudioManager.crossfade("creation")}
+                  onClick={() => {
+                    resumeAudioContext().catch(() => {});
+                    AudioManager.crossfade("creation");
+                  }}
                   className="px-2.5 py-1 rounded bg-[#1e2230] hover:bg-[#282d40] text-stone-300 text-[11px]"
                 >
-                  Test Crossfade
+                  Test Creation
+                </button>
+                <button
+                  onClick={() => {
+                    resumeAudioContext().catch(() => {});
+                    MusicDirector.playTrackById("oceans-selah");
+                  }}
+                  className="px-2.5 py-1 rounded bg-[#2e261a] hover:bg-[#3d3322] text-[#c99a5e] text-[11px]"
+                >
+                  Test Oceans (SoundCloud)
+                </button>
+                <button
+                  onClick={() => {
+                    resumeAudioContext().catch(() => {});
+                    MusicDirector.playTrackById("so-will-i-instrumental");
+                  }}
+                  className="px-2.5 py-1 rounded bg-[#2e261a] hover:bg-[#3d3322] text-[#c99a5e] text-[11px]"
+                >
+                  Test So Will I (SoundCloud)
                 </button>
                 <button
                   onClick={() => AudioManager.playTrack("silence")}

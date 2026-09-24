@@ -91,7 +91,7 @@ export const OrdinaryLifeExperience: React.FC = () => {
                   : "bg-[#14161f] text-stone-400 hover:text-white border border-[#232635]"
               }`}
             >
-              Friction 0{i + 1}
+              {card.tag.split(" · ")[1] || `Memory ${i + 1}`}
             </button>
           ))}
         </div>

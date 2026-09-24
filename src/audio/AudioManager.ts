@@ -6,6 +6,7 @@
 import { MusicEngine } from "./MusicEngine";
 import { AmbientEngine } from "./AmbientEngine";
 import { useAudioStore, AudioTrackId, AudioAmbientId } from "../state/audioStore";
+import { setupAudioUnlockListeners, resumeAudioContext } from "./audioContext";
 
 class AudioManagerClass {
   private musicEngine: MusicEngine;
@@ -18,14 +19,14 @@ class AudioManagerClass {
   }
 
   public init() {
-    // Context starts on user click
-    const ctx = this.musicEngine.getContext();
-    if (ctx && ctx.state === "suspended") {
-      ctx.resume();
-    }
+    setupAudioUnlockListeners();
+    resumeAudioContext();
   }
 
   public playTrack(trackId: AudioTrackId, ambientId?: AudioAmbientId) {
+    setupAudioUnlockListeners();
+    resumeAudioContext();
+
     const store = useAudioStore.getState();
     if (!store.audioEnabled) return;
 
@@ -51,6 +52,9 @@ class AudioManagerClass {
   }
 
   public fadeIn(trackId: AudioTrackId, duration = 3.0) {
+    setupAudioUnlockListeners();
+    resumeAudioContext();
+
     const store = useAudioStore.getState();
     if (!store.audioEnabled) return;
 

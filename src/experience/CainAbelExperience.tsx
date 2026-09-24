@@ -81,7 +81,7 @@ export const CainAbelExperience: React.FC = () => {
 
       <div className="relative z-10 max-w-2xl mx-auto px-6 pt-10 text-center">
         <span className="text-xs font-sans tracking-[0.25em] uppercase text-[#c99a5e]">
-          Genesis · Part III · The Proof Scene
+          Genesis · Chapter 4
         </span>
         <h1 className="mt-3 text-3xl sm:text-4xl font-serif font-medium text-white text-balance">
           {activeSubScene === "offering" ? "The Smoke of the Offering" : "The Field at Dusk"}
@@ -93,8 +93,8 @@ export const CainAbelExperience: React.FC = () => {
         </p>
 
         {isMemoryFormed && (
-          <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#3d1818]/60 border border-[#802a2a]/40 text-[11px] font-mono text-[#ffb0b0]">
-            <span>Memory Formed: cain-blood (wt: 0.92)</span>
+          <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1c1d28]/70 border border-[#2b2e40] text-[11px] font-serif italic text-stone-400">
+            <span>A quiet grief settles into memory</span>
           </div>
         )}
       </div>

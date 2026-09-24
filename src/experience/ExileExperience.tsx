@@ -28,7 +28,7 @@ const sceneMap: Record<string, { scene: SceneDefinition; subtitle: string; title
   },
   "fall-of-jerusalem": {
     scene: fallOfJerusalemScene,
-    subtitle: "Exile — Collapse Two",
+    subtitle: "Exile — 586 BC",
     title: "Ang Pagbagsak ng Jerusalem at ang Katahimikan ng Abo",
   },
   daniel: {
@@ -119,14 +119,13 @@ export const ExileExperience: React.FC<{ explicitSlug?: string }> = ({ explicitS
 
           {isJeremiahMemoryInscribed && (
             <div className="inline-flex items-center gap-1.5 px-3 py-1 mt-2 rounded-full bg-[#c99a5e]/10 border border-[#c99a5e]/30 text-[10px] uppercase font-sans tracking-widest text-[#c99a5e]">
-              <span>Permanent Memory Inscribed: jeremiah-loneliness</span>
+              <span>Memory Preserved: The Prophet's Lament</span>
             </div>
           )}
 
           {isJerusalemMemoryInscribed && (
             <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 mt-2 rounded-full bg-[#8c362e]/20 border border-[#8c362e]/45 text-[10px] uppercase font-sans tracking-widest text-[#e89a91] shadow-lg">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#d9532f] animate-ping" />
-              <span>COLLAPSE TWO: jerusalem-fall (Weight: 0.97)</span>
+              <span>Memory Preserved: The Silence of Fallen Jerusalem</span>
             </div>
           )}
         </header>

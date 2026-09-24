@@ -50,7 +50,8 @@ export type AudioTrackId =
   | "acts-dawn"
   | "expansion"
   | "revelation-vast"
-  | "collapse-stack";
+  | "collapse-stack"
+  | (string & {});
 
 export type AudioAmbientId =
   | "subtle-room"

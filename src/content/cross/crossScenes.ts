@@ -21,6 +21,7 @@ export const gethsemaneScene: SceneDefinition = {
     track: "gethsemane",
     ambient: "gethsemane-dusk",
   },
+  echoTags: ["music", "silence", "companionship-without-words"],
   narrative: [
     {
       type: "narrative",
@@ -113,7 +114,7 @@ export const petersDenialScene: SceneDefinition = {
   id: "cross-peter-denial",
   focus: "shared",
   pov: "third",
-  emotion: { grief: 0.8, overwhelm: 0.7, attachment: 0.9, trust: -0.1 },
+  emotion: { grief: 0.8, overwhelm: 0.7, attachment: 0.9, trust: 0.0 },
   environment: { id: "courtyard-firelight", fallback2D: "courtyard-firelight-2d" },
   audio: {
     track: "arrest",
@@ -221,6 +222,7 @@ export const crucifixionScene: SceneDefinition = {
     track: "crucifixion-silence", // Spec: audio direction inverts, near-total silence
     ambient: "silent-agony",
   },
+  echoTags: ["intuition", "protection", "emotional-safety", "noticing"],
   narrative: [
     {
       type: "narrative",

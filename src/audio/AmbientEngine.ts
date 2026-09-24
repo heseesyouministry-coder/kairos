@@ -4,6 +4,7 @@
  */
 
 import { AudioAmbientId } from "../state/audioStore";
+import { getSharedAudioContext, resumeAudioContext } from "./audioContext";
 
 export class AmbientEngine {
   private ctx: AudioContext | null = null;
@@ -20,18 +21,22 @@ export class AmbientEngine {
     }
   }
 
-  private initContext(): AudioContext {
+  public getContext(): AudioContext | null {
     if (!this.ctx) {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      this.ctx = new AudioCtx();
+      this.ctx = getSharedAudioContext();
     }
+    return this.ctx;
+  }
+
+  private initContext(): AudioContext {
+    this.ctx = this.ctx || getSharedAudioContext();
     if (!this.ambientGain) {
       this.ambientGain = this.ctx.createGain();
-      this.ambientGain.gain.setValueAtTime(0.4, this.ctx.currentTime);
+      this.ambientGain.gain.setValueAtTime(0.005, this.ctx.currentTime);
       this.ambientGain.connect(this.ctx.destination);
     }
     if (this.ctx.state === "suspended") {
-      this.ctx.resume();
+      resumeAudioContext().catch(() => {});
     }
     return this.ctx;
   }
@@ -226,7 +231,7 @@ export class AmbientEngine {
         this.activeSource = null;
       }
       if (this.ambientGain && this.ctx) {
-        this.ambientGain.gain.setValueAtTime(0.4, this.ctx.currentTime);
+        this.ambientGain.gain.setValueAtTime(0.005, this.ctx.currentTime);
       }
     }, fadeDuration * 1000 + 100);
 

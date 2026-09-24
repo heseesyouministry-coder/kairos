@@ -134,6 +134,7 @@ export const theLongSilenceScene: SceneDefinition = {
     track: "the-long-silence",
     ambient: "expectant-silence",
   },
+  echoTags: ["music", "silence", "companionship-without-words"],
   narrative: [
     {
       type: "sensory",

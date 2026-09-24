@@ -65,23 +65,22 @@ export const RevelationExperience: React.FC<{ explicitSlug?: string }> = ({ expl
 
     // Memory Resonance Checks for Phase 5
     if (slug === "theo-understands") {
-      // Section 2 & 3 Requirement: sam-fix-it fires here and nowhere else before this
+      // Memory echo: sam-fix-it fires here and nowhere else before this
       const hasSamFixIt = storedMemories.some((m) => m.id === "sam-fix-it");
       if (hasSamFixIt) {
         setMemoryEcho({
           id: "sam-fix-it",
-          label: "Memory Resonance: sam-fix-it (Weight: 0.55 · Pre-Mountain Origin)",
+          label: "A quiet resonance: The impulse to fix everything",
           text: "Ang dating gawi sa kwarto bago umakyat ng bundok — labing-apat na tabs, overanalysis, at ang maling akala na ang pag-aayos ay pagmamahal.",
         });
       }
     } else if (slug === "final-vision") {
-      // Section 3 Requirement: gethsemane-cross, briefly, at peak system-wide weight (0.99),
-      // then deliberately does NOT dominate the scene — trust without erasing memory of pain
+      // Memory echo: gethsemane-cross, briefly, then deliberately does NOT dominate the scene
       const hasCross = storedMemories.some((m) => m.id === "gethsemane-cross");
       if (hasCross) {
         setMemoryEcho({
           id: "gethsemane-cross",
-          label: "Memory Resonance: gethsemane-cross (Peak System Weight: 0.99)",
+          label: "A quiet resonance: The shadow of the cross",
           text: "Naroroon pa rin ang alaala ng sakit at ng krus, ngunit hindi na ito naghahari o nagwawasak. Pananalig nang hindi binubura ang sugat.",
         });
       }

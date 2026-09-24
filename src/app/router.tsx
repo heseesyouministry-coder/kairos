@@ -25,6 +25,12 @@ import { ActsExperience } from "../experience/ActsExperience";
 import { RevelationExperience } from "../experience/RevelationExperience";
 import { AwakeningExperience } from "../experience/AwakeningExperience";
 
+// Phase 7: System A — The Biblical Library
+import { BooksShelfView } from "../library/BooksShelfView";
+import { BookDetailPage } from "../library/BookDetailPage";
+import { StoryReaderPage } from "../library/StoryReaderPage";
+import { CharactersIndexPage } from "../library/CharactersIndexPage";
+
 export const AppRoutes: React.FC = () => {
   return (
     <Routes>
@@ -80,6 +86,18 @@ export const AppRoutes: React.FC = () => {
       {/* The Full Culmination / Awakening (Phase 5 Full Sequence) */}
       <Route path="/experience/awakening/full" element={<AwakeningExperience />} />
       <Route path="/experience/awakening" element={<AwakeningExperience />} />
+
+      {/* Phase 7: System A — The Biblical Library */}
+      <Route path="/books" element={<BooksShelfView />} />
+      <Route path="/books/old" element={<BooksShelfView />} />
+      <Route path="/books/new" element={<BooksShelfView />} />
+      <Route path="/books/:bookId/:storyId" element={<StoryReaderPage />} />
+      <Route path="/books/:bookId" element={<BookDetailPage />} />
+
+      {/* Biblical Figures Groundwork */}
+      <Route path="/characters" element={<CharactersIndexPage />} />
+      <Route path="/characters/:characterId" element={<CharactersIndexPage />} />
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

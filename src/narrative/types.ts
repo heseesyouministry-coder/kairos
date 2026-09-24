@@ -74,3 +74,5 @@ export type SceneDefinition = {
   transition: { type: TransitionType; to: string };
   echoTags?: string[];
 };
+
+export * from "./libraryTypes";

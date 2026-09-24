@@ -260,6 +260,7 @@ export const jobScene: SceneDefinition = {
     track: "job",
     ambient: "ash-wind",
   },
+  echoTags: ["doubt", "wisdom-vs-knowledge", "intellectual-humility"],
   narrative: [
     {
       type: "sensory",

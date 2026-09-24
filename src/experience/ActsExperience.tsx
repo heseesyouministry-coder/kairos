@@ -81,32 +81,31 @@ export const ActsExperience: React.FC<{ explicitSlug?: string }> = ({ explicitSl
       if (hasMoses) {
         setMemoryEcho({
           id: "moses-overwhelm",
-          label: "Memory Resonance: Moses (Weight: 0.75)",
+          label: "Memory Resonance: The Burden of the Wilderness",
           text: "Naalala ni Theo ang bigat ng pamumuno sa ilang — hindi pala kailangang maging walang dungis ang komunidad para manahan ang biyaya.",
         });
       }
     } else if (slug === "stephen") {
       // Stephen resonates with jeremiah-loneliness and jerusalem-fall
-      // Section 3 Requirement: Echo of Jerusalem, but response is GRIEF + ACCEPTANCE, not devastation
       const hasJerusalem = storedMemories.some((m) => m.id === "jerusalem-fall");
       const hasJeremiah = storedMemories.some((m) => m.id === "jeremiah-loneliness");
 
       if (hasJerusalem || hasJeremiah) {
         setMemoryEcho({
           id: "stephen-resonance",
-          label: "Memory Transformation: Jerusalem Fall (0.97) & Jeremiah (0.70)",
+          label: "Memory Transformation: Grief Turned to Peace",
           text: "Ang dating pagkawasak sa pagbagsak ng templo ay naging kapayapaan at pagtanggap: may lungkot, ngunit walang pagkawasak ng pananalig.",
         });
       }
     } else if (slug === "paul") {
-      // Paul resonates with david-fall (categorizing people by worst action) and joseph-separation
+      // Paul resonates with david-fall and joseph-separation
       const hasDavid = storedMemories.some((m) => m.id === "david-fall");
       const hasJoseph = storedMemories.some((m) => m.id === "joseph-separation");
 
       if (hasDavid || hasJoseph) {
         setMemoryEcho({
           id: "paul-resonance",
-          label: "Memory Resonance: David (0.85) & Joseph (0.88)",
+          label: "Memory Resonance: Restoration Beyond Failure",
           text: "Ang tao ay hindi nagtatapos sa kanyang pinakamasamang ginawa — mula tagausig tungo sa 'Kapatid na Saulo'.",
         });
       }

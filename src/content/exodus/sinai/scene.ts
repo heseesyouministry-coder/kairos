@@ -20,6 +20,7 @@ export const sinaiScene: SceneDefinition = {
     track: "sinai",
     ambient: "sinai-trumpet-thunder",
   },
+  echoTags: ["father", "son", "correction", "approval", "discipline"],
   narrative: [
     {
       type: "sensory",

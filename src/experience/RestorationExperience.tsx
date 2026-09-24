@@ -70,7 +70,7 @@ export const RestorationExperience: React.FC<{ explicitSlug?: string }> = ({ exp
           </h1>
           {isLongSilence && (
             <div className="inline-flex items-center gap-1.5 px-3 py-1 mt-2 rounded-full bg-[#7aa3be]/10 border border-[#7aa3be]/25 text-[10px] uppercase font-sans tracking-widest text-[#aed8f2]">
-              <span>Expectation: Bridge to Phase 4 (The Silence Holds)</span>
+              <span>The Silence Holds · 400 Years of Expectation</span>
             </div>
           )}
         </header>

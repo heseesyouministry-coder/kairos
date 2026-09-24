@@ -46,7 +46,7 @@ const sceneMap: Record<string, { scene: SceneDefinition; subtitle: string; title
   },
   crucifixion: {
     scene: crucifixionScene,
-    subtitle: "The Passion — Crucifixion (Collapse Three)",
+    subtitle: "The Passion — Crucifixion",
     title: "Ang Dilim sa Katanghaliang Tapat",
   },
 };
@@ -62,6 +62,11 @@ export const CrossExperience: React.FC<{ explicitSlug?: string }> = ({ explicitS
   const setCurrentScene = useExperienceStore((s) => s.setCurrentScene);
   const markSceneCompleted = useProgressStore((s) => s.markSceneCompleted);
   const [activeResonances, setActiveResonances] = useState<string[]>([]);
+
+  const isDevModeActive =
+    typeof window !== "undefined" &&
+    (import.meta.env.VITE_ENABLE_DEV_MODE === "true" ||
+      new URLSearchParams(window.location.search).get("debug") === "kairos");
 
   useEffect(() => {
     setCurrentScene(scene.id, scene.pov, scene.focus, scene.emotion);
@@ -127,16 +132,8 @@ export const CrossExperience: React.FC<{ explicitSlug?: string }> = ({ explicitS
             {title}
           </h1>
 
-          {/* Collapse Three Badge */}
-          {isCrucifixion && (
-            <div className="inline-flex items-center gap-2 px-3 py-1 mt-2 rounded-full bg-[#351518]/60 border border-[#8c362e]/70 text-[10px] uppercase font-mono tracking-widest text-[#f29388]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#f29388] animate-ping" />
-              <span>COLLAPSE THREE: TOTAL HELPLESSNESS (0.99 PEAK)</span>
-            </div>
-          )}
-
-          {/* Active Memory Resonances Display */}
-          {activeResonances.length > 0 && (
+          {/* Active Memory Resonances Display (Dev Gated) */}
+          {isDevModeActive && activeResonances.length > 0 && (
             <div className="mt-3 flex flex-col gap-1 items-center">
               {activeResonances.map((res, idx) => (
                 <div

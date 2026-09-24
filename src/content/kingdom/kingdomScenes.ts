@@ -144,6 +144,7 @@ export const ruthScene: SceneDefinition = {
     track: "ruth",
     ambient: "harvest-breeze",
   },
+  echoTags: ["intuition", "protection", "emotional-safety", "noticing"],
   narrative: [
     {
       type: "sensory",
@@ -252,6 +253,7 @@ export const saulScene: SceneDefinition = {
     track: "saul",
     ambient: "court-tension",
   },
+  echoTags: ["father", "son", "correction", "approval", "discipline"],
   narrative: [
     {
       type: "narrative",
@@ -360,6 +362,7 @@ export const davidJonathanScene: SceneDefinition = {
     track: "david-jonathan",
     ambient: "friendship-quiet",
   },
+  echoTags: ["music", "silence", "companionship-without-words"],
   narrative: [
     {
       type: "sensory",
@@ -454,7 +457,7 @@ export const davidAndBathsheba: SceneDefinition = {
   id: "kingdom-david-bathsheba",
   focus: "biblical-character",
   pov: "third",
-  emotion: { attachment: 0.6, grief: 0.5, overwhelm: 0.3, trust: -0.2 },
+  emotion: { attachment: 0.6, grief: 0.5, overwhelm: 0.3, trust: 0.0 },
   environment: { id: "palace-night", fallback2D: "palace-night-2d" },
   audio: {
     track: "david-bathsheba",
@@ -523,6 +526,7 @@ export const solomonScene: SceneDefinition = {
     track: "solomon",
     ambient: "court-tension",
   },
+  echoTags: ["doubt", "wisdom-vs-knowledge", "intellectual-humility"],
   narrative: [
     {
       type: "sensory",

@@ -416,7 +416,6 @@ export const BEGIN_CAST_SCENES: Record<string, SceneDefinition> = {
   "mara": maraScene,
   "lydia": lydiaScene,
   "lia": liaScene,
-  "lia-interrupts": liaScene,
   "luca": lucaScene,
   "departure": departureScene,
 };

@@ -18,6 +18,7 @@ export const mosesChildhoodScene: SceneDefinition = {
     track: "moses",
     ambient: "river-nile-water",
   },
+  echoTags: ["intuition", "protection", "emotional-safety", "noticing"],
   narrative: [
     {
       type: "narrative",
