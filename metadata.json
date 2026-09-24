@@ -1,0 +1,6 @@
+{
+  "name": "KAIROS",
+  "description": "A literary, cinematic web experience of Biblical history witnessed through shifting perspective.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", "Source Serif 4", Georgia, serif;
+  --font-display: "Cinzel", "Cormorant Garamond", serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-canvas: #0c0d10;
+  --color-paper: #131418;
+  --color-subtle: #1a1b22;
+  --color-border: #262833;
+  --color-gold: #c99a5e;
+  --color-gold-muted: #8c6e43;
+  --color-ink: #e8e6df;
+  --color-muted: #95938f;
+}
+
+/* Custom scrollbar and subtle atmospheric smoothing */
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #0c0d10;
+  color: #e8e6df;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(201, 154, 94, 0.25);
+  color: #ffffff;
+}
+
+/* Atmospheric subtle noise texture via SVG data uri */
+.bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* Text glow effects for cinematic cues */
+.text-shadow-subtle {
+  text-shadow: 0 0 24px rgba(201, 154, 94, 0.2);
+}
+
+.text-shadow-deep {
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+}
