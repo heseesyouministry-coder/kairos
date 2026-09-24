@@ -6,6 +6,8 @@ import { TopBar } from "./components/interface/TopBar";
 import { DebugPanel } from "./components/overlays/DebugPanel";
 import { NarrativeErrorBoundary } from "./components/interface/NarrativeErrorBoundary";
 import { CinematicMusicLayer } from "./components/audio/CinematicMusicLayer";
+import { ChroniclesNavigatorModal } from "./components/navigation/ChroniclesNavigatorModal";
+import { FloatingNavigatorTrigger } from "./components/navigation/FloatingNavigatorTrigger";
 import { AudioManager } from "./audio/AudioManager";
 import { MusicDirector } from "./audio/worship/MusicDirector";
 import { setupAudioUnlockListeners } from "./audio/audioContext";
@@ -46,6 +48,8 @@ export default function App() {
           </main>
           {isDevModeActive && <DebugPanel />}
           <CinematicMusicLayer />
+          <ChroniclesNavigatorModal />
+          <FloatingNavigatorTrigger />
         </div>
       </AppProviders>
     </BrowserRouter>

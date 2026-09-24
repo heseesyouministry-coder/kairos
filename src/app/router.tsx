@@ -30,6 +30,7 @@ import { BooksShelfView } from "../library/BooksShelfView";
 import { BookDetailPage } from "../library/BookDetailPage";
 import { StoryReaderPage } from "../library/StoryReaderPage";
 import { CharactersIndexPage } from "../library/CharactersIndexPage";
+import { ChroniclesNavigatorPage } from "../library/ChroniclesNavigatorPage";
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -97,6 +98,12 @@ export const AppRoutes: React.FC = () => {
       {/* Biblical Figures Groundwork */}
       <Route path="/characters" element={<CharactersIndexPage />} />
       <Route path="/characters/:characterId" element={<CharactersIndexPage />} />
+
+      {/* Canon Chronicles & Arc Navigator */}
+      <Route path="/chronicles" element={<ChroniclesNavigatorPage />} />
+      <Route path="/timeline" element={<Navigate to="/chronicles" replace />} />
+      <Route path="/navigator" element={<Navigate to="/chronicles" replace />} />
+      <Route path="/arcs" element={<Navigate to="/chronicles" replace />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

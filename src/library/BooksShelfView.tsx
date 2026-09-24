@@ -64,16 +64,27 @@ export const BooksShelfView: React.FC = () => {
           narratives on their own scriptural terms, free of Theo's private coping patterns.
         </p>
 
-        {/* Intersection callout */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#141722]/80 border border-[#25293d] text-xs text-stone-300 font-sans">
-          <Compass className="w-3.5 h-3.5 text-[#c99a5e]" />
-          <span>Looking for the emotional path?</span>
-          <Link
-            to="/begin"
-            className="text-[#c99a5e] hover:underline font-medium ml-1"
-          >
-            Enter Theo's Journey →
-          </Link>
+        {/* Intersection callouts */}
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#141722]/80 border border-[#25293d] text-xs text-stone-300 font-sans">
+            <Compass className="w-3.5 h-3.5 text-[#c99a5e]" />
+            <span>Explore by eras, arcs & chapters:</span>
+            <Link
+              to="/chronicles"
+              className="text-[#c99a5e] hover:underline font-medium ml-1"
+            >
+              Open Arc Navigator →
+            </Link>
+          </div>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#141722]/80 border border-[#25293d] text-xs text-stone-300 font-sans">
+            <span>Or experience the narrative flow:</span>
+            <Link
+              to="/begin"
+              className="text-[#c99a5e] hover:underline font-medium ml-1"
+            >
+              Enter Theo's Journey →
+            </Link>
+          </div>
         </div>
       </div>
 

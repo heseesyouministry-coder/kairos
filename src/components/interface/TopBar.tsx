@@ -6,7 +6,8 @@ import { AudioManager } from "../../audio/AudioManager";
 import { MusicDirector } from "../../audio/worship/MusicDirector";
 import { resumeAudioContext } from "../../audio/audioContext";
 import { useWorshipStore } from "../../state/worshipStore";
-import { Volume2, VolumeX, SlidersHorizontal, FileText, Sparkles } from "lucide-react";
+import { Volume2, VolumeX, SlidersHorizontal, FileText, Sparkles, Compass } from "lucide-react";
+import { useNavigatorStore } from "../../state/navigatorStore";
 
 export const TopBar: React.FC = () => {
   const location = useLocation();
@@ -16,6 +17,7 @@ export const TopBar: React.FC = () => {
   const debugModeVisible = useSettingsStore((s) => s.debugModeVisible);
   const readerMode = useSettingsStore((s) => s.readerMode);
   const toggleReaderMode = useSettingsStore((s) => s.toggleReaderMode);
+  const openNavigator = useNavigatorStore((s) => s.openNavigator);
 
   // Strict env flag gating for dev/scaffolding modes (Phase 8, Section 2)
   // Dev tools are completely stripped from client UI unless explicitly enabled via VITE_ENABLE_DEV_MODE
@@ -41,9 +43,9 @@ export const TopBar: React.FC = () => {
   };
 
   // Nav links: Only discoverable once the reader has begun (past /).
-  // "AWAKENING" and "JOURNEY" are removed because they spoil the ending or act as scene shortcuts.
   const navLinks = [
     { label: "Prologue", path: "/begin" },
+    { label: "Chronicles", path: "/chronicles" },
     { label: "Library", path: "/books" },
     { label: "Figures", path: "/characters" },
   ];
@@ -105,6 +107,16 @@ export const TopBar: React.FC = () => {
             )}
           </button>
         )}
+
+        {/* Canonical Arcs & Chapters Navigator trigger */}
+        <button
+          onClick={() => openNavigator()}
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-[#161822] hover:bg-[#1f2230] border border-[#272a3b] hover:border-[#c99a5e]/50 text-xs font-sans text-stone-300 hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+          title="Open Canon & Arc Navigator (⌘K)"
+        >
+          <Compass className="w-3.5 h-3.5 text-[#c99a5e]" />
+          <span className="hidden sm:inline">Arcs & Chapters</span>
+        </button>
 
         <button
           onClick={handleAudioToggle}

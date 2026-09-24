@@ -4,7 +4,7 @@ import { ALL_CHARACTERS, getCharacterById } from "../content/library/charactersD
 import { BiblicalCharacter } from "../narrative/libraryTypes";
 import { CharacterModal } from "./CharacterModal";
 import { ALL_LIBRARY_STORIES } from "../content/library/storiesData";
-import { Users, Sparkles, BookOpen, Search, ArrowLeft } from "lucide-react";
+import { Users, Sparkles, BookOpen, Search, ArrowLeft, Compass } from "lucide-react";
 
 export const CharactersIndexPage: React.FC = () => {
   const { characterId } = useParams<{ characterId?: string }>();
@@ -40,10 +40,21 @@ export const CharactersIndexPage: React.FC = () => {
         <h1 className="text-3xl md:text-5xl font-display font-bold text-white tracking-wide mb-4">
           Biblical Figures
         </h1>
-        <p className="text-stone-300 text-sm md:text-base leading-relaxed">
+        <p className="text-stone-300 text-sm md:text-base leading-relaxed mb-5">
           The 26 historical witnesses encountered throughout KAIROS. Each characterized by their
           biblical arc, key relationships, and scriptural accounts.
         </p>
+
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#141722]/80 border border-[#25293d] text-xs text-stone-300 font-sans">
+          <Compass className="w-3.5 h-3.5 text-[#c99a5e]" />
+          <span>Explore witnesses chronologically across eras & chapters:</span>
+          <Link
+            to="/chronicles"
+            className="text-[#c99a5e] hover:underline font-medium ml-1"
+          >
+            Open Arc Navigator →
+          </Link>
+        </div>
       </div>
 
       {/* Filter and Search Bar */}
